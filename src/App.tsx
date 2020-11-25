@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { GlobalProvider } from './GlobalContext'
+
+// import Dashboard from "./components/Dashboard"
+import UsersList from "./components/UsersList"
+import AddItem from "./components/AddItem"
+import ItemsList from "./components/ItemsList"
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalProvider>
+      <div style={{ maxWidth: 1024, margin: "auto", padding: "0 15px" }}>
+        <UsersList />
+        <AddItem />
+        <ItemsList />
+      </div>
+    </GlobalProvider>
   );
 }
 
