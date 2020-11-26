@@ -6,7 +6,7 @@ interface Props {
 
 const Dashboard = (props: Props) => {
     return (
-        <div>
+        <div className="dashboard">
             {props.children}
         </div>
     )

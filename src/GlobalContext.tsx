@@ -13,7 +13,7 @@ export const GlobalProvider = (props: Props) => {
         {
             // id: "kkeopz",
             username: "Peter",
-            color: "#2767dd",
+            color: "#364F6B",
             items: [
                 { name: "Bananas", quantity: 10, price: 1 },
                 { name: "Strawberry", quantity: 20, price: 1.22 },
@@ -23,7 +23,7 @@ export const GlobalProvider = (props: Props) => {
         {
             // id: "kkeopz",
             username: "William",
-            color: "#f85f73",
+            color: "#3FC1C9",
 
             items: [
                 { name: "Brocolis 🥦", quantity: 10, price: 1.39 },
@@ -34,7 +34,7 @@ export const GlobalProvider = (props: Props) => {
         {
             // id: "kkeopz",
             username: "Lorenzo",
-            color: "#f7ab38",
+            color: "#FC5185",
             items: [
                 { name: "Pizza 🍕", quantity: 3, price: 2.39 },
                 { name: "Comcumber 🥒", quantity: 3, price: 1.10 },
@@ -44,7 +44,7 @@ export const GlobalProvider = (props: Props) => {
         {
             // id: "kkeopz",
             username: "Daniela",
-            color: "#02c469",
+            color: "#FBC029",
             items: [
                 { name: "Pizza 🍕", quantity: 3, price: 2.39 },
                 { name: "Comcumber 🥒", quantity: 3, price: 1.10 },
