@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
+// import { TwitterPicker } from "react-color";
+
 import "boxicons";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -76,8 +78,9 @@ const UsersList = () => {
     <div className="card">
       <div className="card__header">
         <h3>Users</h3>
-        <span>Total User : {usersContext.length}</span>
-
+        <span>
+          Total User : <strong>{usersContext.length}</strong>
+        </span>
       </div>
       <div className="card__body">
         <div className="list--compact">
@@ -93,39 +96,54 @@ const UsersList = () => {
               >
                 <div className="list__user">
                   <box-icon
-                    className=""
                     size="sm"
                     type="solid"
                     name="user-circle"
                     color={user.color}
                   ></box-icon>
-                  <span className="list__username" style={{ color: user.color }}>{user.username}</span>
+                  <span
+                    className="list__username"
+                    style={{ color: user.color }}
+                  >
+                    {user.username}
+                  </span>
                 </div>
                 <div className="list__infos">
                   <span className="list__price">{userTotalPrice(index)}</span>
                   <button
-                    className="button button--light button--square"
+                    className="button button--square"
                     onClick={() => removeUser(index)}
-                  >
-                    <box-icon
-                      size="sm"
-                      type="solid"
-                      name="trash"
-                      style={{ opacity: 0.4 }}
-                    ></box-icon>
-                  </button>
+                  ></button>
                 </div>
               </motion.div>
             </AnimatePresence>
           ))}
         </div>
-
       </div>
       <div className="card__footer">
         <div className="form__grid form__grid--row">
-          <input className="input" type="text" name="username" value={user.username} onChange={handleInputChange} placeholder="Enter a Username" />
-          <input className="input input--color" type="color" name="color" value={user.color} onChange={handleInputChange} placeholder="Enter a Color" />
-          <button className="button button--dark" type="button" onClick={addUser}>
+          <input
+            className="input"
+            type="text"
+            name="username"
+            value={user.username}
+            onChange={handleInputChange}
+            placeholder="Enter a Username"
+          />
+          {/* <TwitterPicker /> */}
+          <input
+            className="input--color"
+            type="color"
+            name="color"
+            value={user.color}
+            onChange={handleInputChange}
+            placeholder="Enter a Color"
+          />
+          <button
+            className="button button--dark"
+            type="button"
+            onClick={addUser}
+          >
             <span>New</span>
             <div className="button__icon">
               <box-icon
