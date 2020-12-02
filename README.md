@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# Shooper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create your shopping list for yourself or for your group of friends and estimate the price in advance of your total purchases.
 
-## Available Scripts
+Each user can have his own shopping list. Estimate the amount that everyone has to pay.
 
-In the project directory, you can run:
+![Preview](./public/preview.jpg "Preview of web application")
 
-### `yarn start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. clone the respositoty
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/OliveCh12/shooper.git
+```
 
-### `yarn test`
+2. Install dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `yarn build`
+## How to use
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First, add one or multiple users in the first panel. You can also specify a color per user otherwise shopper automatically creates a color for each user created.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Then you can add as many items as you want in the panel `Add Item` by specifying the user for each added item.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Distributed under the MIT License. See LICENSE for more information.
