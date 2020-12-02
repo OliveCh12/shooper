@@ -1,10 +1,16 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
-import "boxicons";
+
+// Library
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFolderOpen, faFolder } from "@fortawesome/free-solid-svg-icons";
+
+// Cutsom Components
+import UserItems from "./UserItems";
+import Button from "./Button";
 
 const ItemsList = () => {
   const [usersContext, setUsersContext] = useContext(GlobalContext);
-  const [isVisible, setIsVisible] = useState(false);
 
   // Remove User to Global Context
   function removeItem(userIndex: number, itemIndex: number): void {
@@ -48,53 +54,31 @@ const ItemsList = () => {
             {user.items.length === 0 ? (
               ""
             ) : (
-              <div
-                className="list__user-header"
-                style={{ backgroundColor: user.color }}
-              >
-                <span>{user.username}</span>
-                <span>Totals Items : {user.items.length}</span>
-
-                <box-icon
-                  type="solid"
-                  name="down-arrow-circle"
-                  onClick={() => setIsVisible(!isVisible)}
-                ></box-icon>
-              </div>
-            )}
+                <div
+                  className="list__user-header"
+                  style={{ backgroundColor: user.color }}
+                >
+                  <span>{user.username}</span>
+                  <span>Items : {user.items.length}</span>
+                  <FontAwesomeIcon className="list__item-folder" icon={faFolderOpen} size="sm"/>
+                </div>
+              )}
             <div className="list__items">
               {user.items.map((item: any, itemIndex: number) => (
-                <div
-                  className="list__item--big"
-                  style={{ borderRight: `8px solid ${user.color}` }}
-                >
-                  <div className="list__item-body">
-                    <div className="list__item-header">
-                      <div className="list__item-name">
-                        <strong>{item.name}</strong>
-                      </div>
-
-                      <box-icon
-                        name="x-circle"
-                        onClick={() => removeItem(userIndex, itemIndex)}
-                      ></box-icon>
-                    </div>
-                    <div className="list__item-footer">
-                      <span>Quantity : {item.quantity}</span>
-                      <span>Unit Price: {formatPrice(item.price)}</span>
-                      <span className="list__item-price">
-                        {formatPrice(item.quantity * item.price)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <UserItems
+                  key={itemIndex}
+                  name={item.name}
+                  quantity={item.quantity}
+                  price={item.price}
+                  color={user.color}
+                  onClick={() => removeItem(userIndex, itemIndex)}
+                />
               ))}
             </div>
           </div>
         ))}
       </div>
       <div className="card__footer">
-        <button className="button button--dark">Split bascket</button>
         <span className="card__total">{sumOfValues()}</span>
       </div>
     </div>

@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 
+
+import Button from "./Button"
+
 const AddItem = () => {
   const [usersContext, setUsersContext] = useContext(GlobalContext);
 
@@ -39,10 +42,8 @@ const AddItem = () => {
   }
 
   // Add User to Global Context
-  function addItem(
-    event: React.FormEvent<HTMLButtonElement> | React.SyntheticEvent
-  ) {
-    event.preventDefault();
+  function addItem(event: React.SyntheticEvent) {
+    event.preventDefault()
     if (usersContext.length === 0) {
       alert(
         "Before adding an item, you must enter at least 1 user in the list (Users)."
@@ -52,6 +53,12 @@ const AddItem = () => {
       newItem[selectedUser].items.push(item);
       console.log(newItem);
       setUsersContext(newItem);
+    }
+  }
+
+  function handleOnKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      addItem(event)
     }
   }
 
@@ -69,6 +76,7 @@ const AddItem = () => {
             placeholder="Item name"
             onChange={handleInputChange}
             required
+            style={{ gridColumn: "1 / span 2" }}
           />
           <input
             className="input"
@@ -76,6 +84,8 @@ const AddItem = () => {
             name="quantity"
             placeholder="Quantity"
             pattern="[0-9]*"
+            min="0"
+            step="1"
             onChange={handleInputChange}
             required
           />
@@ -86,9 +96,10 @@ const AddItem = () => {
             placeholder="Unit Price"
             pattern="[0-9]+(\.[0-9][0-9]?)?"
             onChange={handleInputChange}
+            onKeyPress={handleOnKeyPress}
             required
           />
-          <select name="username" onChange={handleSelectChange} required>
+          <select name="username" onChange={handleSelectChange} required style={{ gridColumn: "1 / span 2" }}>
             {usersContext.map((user: any) => (
               <option
                 key={user.username}
@@ -99,9 +110,7 @@ const AddItem = () => {
               </option>
             ))}
           </select>
-          <button className="button button--dark" onClick={addItem}>
-            Add Item
-          </button>
+          <Button type='button' onClick={addItem} color="dark" style={{ gridColumn: "1 / span 2" }}>Add to Cart</Button>
         </form>
       </div>
     </div>

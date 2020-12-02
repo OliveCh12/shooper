@@ -18,7 +18,6 @@ function App() {
           <div className="column column--left">
             <header>
               <h1>Shooper</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             </header>
             <UsersList />
             <AddItem />

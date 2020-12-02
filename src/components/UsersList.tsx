@@ -1,48 +1,64 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../GlobalContext";
-// import { TwitterPicker } from "react-color";
+import { GlobalContext } from "../GlobalContext"
 
-import "boxicons";
-
+// Library
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { motion, AnimatePresence } from "framer-motion";
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "box-icon": any;
-    }
-  }
-}
+
+// Custom Components
+import Button from "./Button"
+
+
 
 const UsersList = () => {
   // Global Context State
   const [usersContext, setUsersContext] = useContext(GlobalContext);
-
+  const [currentColor, setCurrentColor] = useState(["#FC5185", "#FBC029", "#21db68", "#3fc1c9"])
   // Input Current State
   const [user, setUser] = useState({
     username: "",
-    color: "",
+    color: "#5442f3",
     items: [],
   });
 
+
   // Handle input to ge ta simple string
-  function handleInputChange(event: React.FormEvent<HTMLInputElement>): void {
+  function handleInputChange(event: React.FormEvent<HTMLInputElement>) {
     event.preventDefault();
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
     setUser({ ...user, [name]: value });
   }
 
-  // Add User to Global Context
-  function addUser(event: React.FormEvent<HTMLButtonElement>): void {
-    event.preventDefault();
 
+  // Generate a color each time a new user is added
+  function generateColor() {
+    const nextColor = [...currentColor]
+    nextColor.shift()
+    setCurrentColor(nextColor)
+  }
+
+
+
+  // Add User to Global Context
+  function addUser(event: React.FormEvent<HTMLInputElement>): void {
+    event.preventDefault();
     if (user.username.length === 0) {
-      event.currentTarget.dataset.state = "invalid";
+      // event.currentTarget.dataset.state = "invalid";
       alert("You have to specify a name and a color");
     } else {
-      event.currentTarget.dataset.state = "valid";
+      // event.currentTarget.dataset.state = "valid";
       setUsersContext([...usersContext, user]);
-      setUser({ username: "", color: "", items: [] });
+      // Reset Form
+      generateColor()
+      setUser({ username: "", color: currentColor[0], items: [] });
+    }
+  }
+
+  function handleOnKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      addUser(event)
     }
   }
 
@@ -95,12 +111,7 @@ const UsersList = () => {
                 style={{ borderRight: `8px solid ${user.color}` }}
               >
                 <div className="list__user">
-                  <box-icon
-                    size="sm"
-                    type="solid"
-                    name="user-circle"
-                    color={user.color}
-                  ></box-icon>
+                  <FontAwesomeIcon icon={faUser} size="sm" pull="left" style={{ color: user.color }} />
                   <span
                     className="list__username"
                     style={{ color: user.color }}
@@ -110,50 +121,37 @@ const UsersList = () => {
                 </div>
                 <div className="list__infos">
                   <span className="list__price">{userTotalPrice(index)}</span>
-                  <button
-                    className="button button--square"
-                    onClick={() => removeUser(index)}
-                  ></button>
+                  <FontAwesomeIcon className="list__remove" icon={faTrashAlt} size="sm" onClick={() => removeUser(index)}/>
                 </div>
               </motion.div>
             </AnimatePresence>
           ))}
         </div>
       </div>
+      {/* {JSON.stringify(currentColor)} */}
       <div className="card__footer">
         <div className="form__grid form__grid--row">
+          <input
+            className="input--color"
+            type="color"
+            name="color"
+            defaultValue="#6E5BFE"
+            value={user.color}
+            onChange={handleInputChange}
+            placeholder="Enter a Color"
+          />
           <input
             className="input"
             type="text"
             name="username"
             value={user.username}
             onChange={handleInputChange}
+            onKeyPress={handleOnKeyPress}
             placeholder="Enter a Username"
           />
-          {/* <TwitterPicker /> */}
-          <input
-            className="input--color"
-            type="color"
-            name="color"
-            value={user.color}
-            onChange={handleInputChange}
-            placeholder="Enter a Color"
-          />
-          <button
-            className="button button--dark"
-            type="button"
-            onClick={addUser}
-          >
-            <span>New</span>
-            <div className="button__icon">
-              <box-icon
-                size="sm"
-                type="solid"
-                name="user-plus"
-                color="white"
-              ></box-icon>
-            </div>
-          </button>
+          <Button type="button" color="dark" icon="User" onClick={addUser}>
+            Add User
+          </Button>
         </div>
       </div>
     </div>
